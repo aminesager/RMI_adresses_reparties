@@ -20,7 +20,7 @@ public class ServeurCarnetAdresses  {
         }
     }
     
-    public static boolean auth(String password) {
+    public static boolean authentification(String password) {
         return PSW.equals(password);
     }
 }

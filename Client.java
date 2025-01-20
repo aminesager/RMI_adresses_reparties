@@ -11,8 +11,8 @@ public class Client {
         try {
             Scanner scanner = new Scanner(System.in);
             System.out.print("donner le mot de passe: ");
-            String inputPassword = scanner.nextLine();
-            if (!ServeurCarnetAdresses.auth(inputPassword)) {
+            String mdp_user = scanner.nextLine();
+            if (!ServeurCarnetAdresses.authentification(mdp_user)) {
                 System.out.println("Mot de passe incorrect !");
                 return;
             }
@@ -21,26 +21,36 @@ public class Client {
             List<String> contactsList;
             
 
-
-            
-            CarnetAdressesService.supprimerContact("ali");
-            contactsList = CarnetAdressesService.listerContacts();
-            System.out.println("avant de modifier");
-            System.out.println("Contacts restants: " + contactsList);
-
-            CarnetAdressesService.modifierContact("iheb", "9999");
-            
-
-            contactsList = CarnetAdressesService.listerContacts();
-            System.out.println("apres de modifier");
-            System.out.println("Contacts restants: " + contactsList);
-
+            System.err.println("essaye de differents methodes : ↓↓↓");
+            //ajouter les contacts
             CarnetAdressesService.ajouterContact("mohamed amine", "7777" );
             CarnetAdressesService.ajouterContact("mohamed ali ", "8888" );
             CarnetAdressesService.ajouterContact("mohamed bechir", "6666" );
             CarnetAdressesService.ajouterContact("examen tp reparties", "94194" );
-
+            System.out.println("avant de modifier :");
             contactsList = CarnetAdressesService.listerContacts();
+            System.err.println(contactsList);
+            
+            //supression des contacts
+            CarnetAdressesService.supprimerContact("mohamed ali");
+            CarnetAdressesService.supprimerContact("mohamed bechir");
+            System.out.println("apres:");
+            contactsList = CarnetAdressesService.listerContacts();
+            System.err.println(contactsList);
+
+            CarnetAdressesService.modifierContact("mohamed amine", "0000");
+            CarnetAdressesService.modifierContact("exmaen tp reparties", "0001");
+            CarnetAdressesService.ajouterContact("mohamed aziz", "0002" );
+            System.out.println("apres modifier:");
+            contactsList = CarnetAdressesService.listerContacts();
+            System.err.println(contactsList);
+
+            
+
+            
+            
+
+
             try {
                 File Obj = new File("myfile.txt");
                 FileWriter Writer = new FileWriter("myfile.txt", true);
@@ -48,13 +58,7 @@ public class Client {
                     Writer.write(contactsList.get(i) + "\n");
                 } 
                 Writer.close();
-                System.err.println("le contenu du fichier: ");
-                Scanner Reader = new Scanner(Obj);
-                while (Reader.hasNextLine()) {
-                    String data = Reader.nextLine();
-                    System.out.println(data);
-                }
-                Reader.close();
+            
             } catch (IOException e) {
                 System.out.println("An error occurred.");
                 e.printStackTrace();
